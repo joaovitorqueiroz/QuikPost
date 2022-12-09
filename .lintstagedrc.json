@@ -1,0 +1,8 @@
+{
+  "*.ts":[
+    "npx eslint \"src/**/*.{ts,tsx}\" --fix"
+  ],
+  "*.tsx":[
+    "npx eslint \"src/**/*.{ts,tsx}\" --fix"
+  ]
+}
