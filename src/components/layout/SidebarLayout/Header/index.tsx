@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Box, alpha, styled, Stack, IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import { SidebarContext } from '../../../../contexts/SidebarContext'
+import { SidebarContext } from '@src/contexts/SidebarContext'
 
 import HeaderUserBox from './UserBox'
 

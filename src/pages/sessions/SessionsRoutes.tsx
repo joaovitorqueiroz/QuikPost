@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import { Loadable } from '../../components'
+import { Loadable } from '@src/components'
 import { lazy } from 'react'
 
 const Login = Loadable(lazy(async () => await import('./Login')))

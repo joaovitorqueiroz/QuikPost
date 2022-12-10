@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ListSubheader, alpha, Box, List, styled, Button, ListItem } from '@mui/material'
 import { NavLink as RouterLink } from 'react-router-dom'
-import { SidebarContext } from '../../../../../contexts/SidebarContext'
+import { SidebarContext } from '@src/contexts/SidebarContext'
 
 import TextSnippetIcon from '@mui/icons-material/TextSnippet'
 import PostAddIcon from '@mui/icons-material/PostAdd'

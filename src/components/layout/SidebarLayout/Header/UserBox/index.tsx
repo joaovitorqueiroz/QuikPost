@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles'
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone'
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone'
 
-import { stringAvatar } from '../../../../../utils'
+import { stringAvatar } from '@src/utils'
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
