@@ -33,6 +33,7 @@
     "react/prop-types": "off",
     "import/no-unresolved": "error",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/triple-slash-reference": "off",

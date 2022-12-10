@@ -1,13 +1,13 @@
-import React from 'react'
-import { Navigate, useLocation, Outlet } from 'react-router-dom'
+import { PropsWithChildren } from 'react'
+import { Navigate, useLocation } from 'react-router-dom'
 
-const AuthGuard: React.FC = () => {
+const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation()
 
   const authenticated = true
 
   return (
-    <>{authenticated ? <Outlet /> : <Navigate replace to="/signin" state={{ from: pathname }} />}</>
+    <>{authenticated ? children : <Navigate replace to="/signin" state={{ from: pathname }} />}</>
   )
 }
 
