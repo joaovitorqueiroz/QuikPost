@@ -28,6 +28,7 @@ export const registerUser = async ({
 export type SignInResult = {
   success: boolean
   message: string
+  user: UserData
 }
 
 export type SignInUserData = {
@@ -55,3 +56,12 @@ export type GetUserResult = {
 
 export const getUser = async (): Promise<GetUserResult> =>
   await ((await fakerApi.get('/me', {})) as Promise<GetUserResult>)
+
+// logout
+export type LogoutResult = {
+  success: boolean
+  message: string
+}
+
+export const logout = async (): Promise<LogoutResult> =>
+  await ((await fakerApi.post(`/logout`, {})) as Promise<LogoutResult>)

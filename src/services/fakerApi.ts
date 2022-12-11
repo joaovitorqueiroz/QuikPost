@@ -7,6 +7,7 @@ export default class FakerApi {
       return {
         success: true,
         message: 'Usuario Logado',
+        user: instance._getAuth(),
       }
     },
     '/logout': function (instance: FakerApi, {}) {

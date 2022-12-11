@@ -1,3 +1,5 @@
 export { default as useMutationRegister } from './useMutationRegister'
 export { default as useMutationSignIn } from './useMutationSignIn'
-export { default as useMutationGetUser } from './useMutationGetUser'
+export { default as useMutationLogout } from './useMutationLogout'
+export { default as useGetUser } from './useGetUser'
+export { default as useAuth } from './useAuth'

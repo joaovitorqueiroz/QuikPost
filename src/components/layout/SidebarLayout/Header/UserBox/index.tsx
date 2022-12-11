@@ -7,6 +7,7 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone'
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone'
 
 import { stringAvatar } from '@src/utils'
+import { useAuth, useMutationLogout } from '@src/hooks'
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -39,9 +40,8 @@ const UserBoxLabel = styled(Typography)(
 )
 const HeaderUserBox: React.FC = () => {
   const theme = useTheme()
-  const user = {
-    name: 'User Name',
-  }
+  const { user } = useAuth()
+  const { mutate: logout } = useMutationLogout()
 
   const ref = useRef<any>(null)
   const [isOpen, setOpen] = useState<boolean>(false)
@@ -57,10 +57,10 @@ const HeaderUserBox: React.FC = () => {
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar alt={user.name} {...stringAvatar(user.name)} />
+        <Avatar alt={user?.name} {...stringAvatar(user?.name ?? '')} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel>{user.name}</UserBoxLabel>
+            <UserBoxLabel>{user?.name}</UserBoxLabel>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
@@ -81,11 +81,11 @@ const HeaderUserBox: React.FC = () => {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210, alignItems: 'center' }} display="flex">
-          <Avatar alt={user.name} {...stringAvatar(user.name)} />
-          <UserBoxLabel sx={{ ml: 2 }}>{user.name}</UserBoxLabel>
+          <Avatar alt={user?.name} {...stringAvatar(user?.name ?? '')} />
+          <UserBoxLabel sx={{ ml: 2 }}>{user?.name}</UserBoxLabel>
         </MenuUserBox>
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button color="primary" fullWidth onClick={() => logout()}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sair
           </Button>
