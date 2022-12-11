@@ -3,7 +3,7 @@ const validatorErrorMessages = {
   isEmail: 'Email inválido.',
   cpfInvalid: 'CPF inválido.',
   passwordNotMatched: 'As senhas não correspondem.',
-  min: (fieldName: string, minValue: string): string =>
+  min: (fieldName: string, minValue: number): string =>
     `${fieldName} deve ter no mínimo ${minValue} caracteres.`,
 }
 
