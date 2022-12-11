@@ -66,7 +66,7 @@ const Login: React.FC = () => {
               >
                 <FormInputText
                   name="username"
-                  label="Nome do usuário"
+                  label="Usuário"
                   type="text"
                   control={control}
                   sx={{ mb: 3 }}
