@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
           position: 'fixed',
           left: 0,
           top: 0,
-          background: 'rgb(17, 25, 42)',
+          background: theme.sidebar.background,
           boxShadow: 'none',
         }}
       >
@@ -73,7 +73,7 @@ const Sidebar: React.FC = () => {
       >
         <SidebarWrapper
           sx={{
-            background: 'rgb(17, 25, 42)',
+            background: theme.sidebar.background,
           }}
         >
           <Scrollbar>

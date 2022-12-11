@@ -85,7 +85,7 @@ const HeaderUserBox: React.FC = () => {
           <UserBoxLabel sx={{ ml: 2 }}>{user.name}</UserBoxLabel>
         </MenuUserBox>
         <Box sx={{ m: 1 }}>
-          <Button color="secondary" fullWidth>
+          <Button color="primary" fullWidth>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sair
           </Button>

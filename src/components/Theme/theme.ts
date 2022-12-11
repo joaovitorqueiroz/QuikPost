@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme, alpha } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
 declare module '@mui/material/styles' {
   interface Theme {
@@ -7,14 +7,8 @@ declare module '@mui/material/styles' {
       boxShadow: React.CSSProperties['color']
       width: string
       textColor: React.CSSProperties['color']
-      dividerBg: React.CSSProperties['color']
-      menuItemColor: React.CSSProperties['color']
-      menuItemColorActive: React.CSSProperties['color']
-      menuItemBg: React.CSSProperties['color']
-      menuItemBgActive: React.CSSProperties['color']
+      textColorActive: React.CSSProperties['color']
       menuItemIconColor: React.CSSProperties['color']
-      menuItemIconColorActive: React.CSSProperties['color']
-      menuItemHeadingColor: React.CSSProperties['color']
     }
     header: {
       height: string
@@ -30,14 +24,8 @@ declare module '@mui/material/styles' {
       boxShadow: React.CSSProperties['color']
       width: string
       textColor: React.CSSProperties['color']
-      dividerBg: React.CSSProperties['color']
-      menuItemColor: React.CSSProperties['color']
-      menuItemColorActive: React.CSSProperties['color']
-      menuItemBg: React.CSSProperties['color']
-      menuItemBgActive: React.CSSProperties['color']
+      textColorActive: React.CSSProperties['color']
       menuItemIconColor: React.CSSProperties['color']
-      menuItemIconColorActive: React.CSSProperties['color']
-      menuItemHeadingColor: React.CSSProperties['color']
     }
     header: {
       height: string
@@ -58,16 +46,10 @@ const textLight = {
 // Create a theme instance.
 const theme = createTheme({
   sidebar: {
-    background: '#fff',
-    textColor: '#fff',
-    dividerBg: '#fff',
-    menuItemColor: '#fff',
-    menuItemColorActive: '#fff',
-    menuItemBg: '#fff',
-    menuItemBgActive: '#fff',
-    menuItemIconColor: '#fff',
-    menuItemIconColorActive: '#fff',
-    menuItemHeadingColor: '#fff',
+    background: '#1A2038',
+    textColorActive: '#fff',
+    textColor: alpha('#fff', 0.7),
+    menuItemIconColor: alpha('#ffffff', 0.3), //
     boxShadow: '2px 0 3px rgba(159, 162, 191, .18), 1px 0 1px rgba(159, 162, 191, 0.32)',
     width: '290px', //
   },
@@ -85,8 +67,8 @@ const theme = createTheme({
   palette: {
     text: textLight,
     background: { paper: '#fff', default: '#fafafa' },
-    secondary: { main: '#1976d2', contrastText: '#ffffff' },
-    primary: { main: '#ffffff', contrastText: textLight.primary },
+    primary: { main: '#1976d2', contrastText: '#ffffff' },
+    secondary: { main: '#FFAF38', contrastText: textLight.primary },
     error: {
       main: red.A400,
     },

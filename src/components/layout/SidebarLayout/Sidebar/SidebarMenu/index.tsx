@@ -20,7 +20,7 @@ const MenuWrapper = styled(Box)(
       text-transform: uppercase;
       font-weight: bold;
       font-size: ${theme.typography.pxToRem(12)};
-      color: ${alpha(theme.palette.primary.main, 0.5)};
+      color: ${alpha(theme.palette.text.primary, 0.5)};
       padding: ${theme.spacing(0, 2.5)};
       line-height: 1.4;
     }
@@ -35,7 +35,7 @@ const SubMenuWrapper = styled(Box)(
     
         .MuiButton-root {
           display: flex;
-          color: ${alpha(theme.palette.primary.main, 0.7)};
+          color: ${theme.sidebar.textColor};
           background-color: transparent;
           width: 100%;
           justify-content: flex-start;
@@ -43,7 +43,7 @@ const SubMenuWrapper = styled(Box)(
          
 
           .MuiButton-startIcon {
-            color: ${alpha(theme.palette.primary.main, 0.3)};
+            color: ${theme.sidebar.menuItemIconColor};
             font-size: ${theme.typography.pxToRem(20)};
             margin-right: ${theme.spacing(1)};
           }
@@ -51,10 +51,10 @@ const SubMenuWrapper = styled(Box)(
           &.active,
           &:hover {
             background-color: ${alpha(theme.palette.background.paper, 0.06)};
-            color: ${theme.palette.background.paper};
+            color: ${theme.sidebar.textColorActive};
 
             .MuiButton-startIcon {
-              color: ${theme.palette.primary.main};
+              color: ${theme.sidebar.textColorActive};
             }
           }
         }              
@@ -68,14 +68,7 @@ const SidebarMenu: React.FC = () => {
 
   return (
     <MenuWrapper>
-      <List
-        component="div"
-        subheader={
-          <ListSubheader component="div" disableSticky>
-            Home
-          </ListSubheader>
-        }
-      >
+      <List component="div">
         <SubMenuWrapper>
           <List component="div">
             <ListItem component="div">
