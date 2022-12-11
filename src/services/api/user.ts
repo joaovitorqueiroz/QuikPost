@@ -2,12 +2,12 @@ import FakerApi from '../fakerApi'
 const fakerApi = new FakerApi()
 
 // Register
-type RegisterReturn = {
+export type RegisterReturn = {
   success: boolean
   message: string
 }
 
-type RegisterUserProps = {
+export type RegisterUserProps = {
   name: string
   username: string
   password: string
@@ -25,12 +25,12 @@ export const registerUser = async ({
   })) as Promise<RegisterReturn>)
 
 // signIn
-type SignInReturn = {
+export type SignInReturn = {
   success: boolean
   message: string
 }
 
-type SignInUserProps = {
+export type SignInUserProps = {
   username: string
   password: string
 }

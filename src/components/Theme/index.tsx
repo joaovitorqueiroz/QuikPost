@@ -1,12 +1,8 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import React from 'react'
+import { PropsWithChildren } from 'react'
 import theme from './theme'
 
-type Props = {
-  children?: React.ReactNode
-}
-
-const Theme: React.FC<Props> = ({ children }) => {
+const Theme: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
