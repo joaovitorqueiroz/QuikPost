@@ -40,3 +40,18 @@ export const signIn = async ({ username, password }: SignInUserData): Promise<Si
     username,
     password,
   })) as Promise<SignInResult>)
+
+// getUser
+export type UserData = {
+  name: string
+  username: string
+  id: number
+}
+
+export type GetUserResult = {
+  success: boolean
+  data: UserData
+}
+
+export const getUser = async (): Promise<GetUserResult> =>
+  await ((await fakerApi.get('/me', {})) as Promise<GetUserResult>)

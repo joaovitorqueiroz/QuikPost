@@ -26,11 +26,13 @@ type StringAvatar = {
 }
 
 const stringAvatar = (name: string): StringAvatar => {
+  const firstNameInitial = name.split(' ')[0][0] || ''
+  const secondNameInitial = name.split(' ').length > 1 ? name.split(' ')[1][0] : ''
   return {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: `${firstNameInitial.toUpperCase()}${secondNameInitial.toUpperCase()}`,
   }
 }
 
