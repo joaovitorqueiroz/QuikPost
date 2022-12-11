@@ -1,6 +1,6 @@
 import { Card, Grid } from '@mui/material'
 import { Box, styled } from '@mui/system'
-import Form from './Form'
+import { Form } from './components'
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }))
 
