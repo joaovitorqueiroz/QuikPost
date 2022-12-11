@@ -1,31 +1,19 @@
 import { LoadingButton } from '@mui/lab'
 import { Box, useTheme } from '@mui/system'
-import { NavLink, useNavigate, NavigateFunction } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useSnackbar } from 'notistack'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormInputText } from '@src/components/FormComponents'
-import { useMutation } from 'react-query'
-import { login as loginFetch } from '@src/services/api/user'
 import validationSchema from './validation'
+import { useMutationSignIn } from '@src/pages/sessions/hooks'
 
 const initialValues = {
   username: '',
   password: '',
 }
 
-const onSuccess = (data: any, navigate: NavigateFunction, enqueueSnackbar: any): void => {
-  navigate('/')
-  enqueueSnackbar(data.message, { variant: 'success' })
-}
-const onError = (error: any, enqueueSnackbar: any): void => {
-  enqueueSnackbar(error.message, { variant: 'error' })
-}
-
-const Login: React.FC = () => {
+const Form: React.FC = () => {
   const theme = useTheme()
-  const navigate = useNavigate()
-  const { enqueueSnackbar } = useSnackbar()
 
   const { control, handleSubmit } = useForm({
     mode: 'onChange',
@@ -33,12 +21,9 @@ const Login: React.FC = () => {
     resolver: yupResolver(validationSchema),
   })
 
-  const { mutate: login } = useMutation(loginFetch, {
-    onSuccess: (data) => onSuccess(data, navigate, enqueueSnackbar),
-    onError: (error) => onError(error, enqueueSnackbar),
-  })
+  const { mutate: signIn } = useMutationSignIn()
 
-  const onSubmit = handleSubmit((data) => login(data))
+  const onSubmit = handleSubmit((data) => signIn(data))
 
   return (
     <Box p={4} height="100%">
@@ -84,4 +69,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default Form
