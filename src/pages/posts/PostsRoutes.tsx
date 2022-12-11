@@ -2,12 +2,16 @@ import { RouteObject } from 'react-router-dom'
 import { Loadable } from '@src/components'
 import { lazy } from 'react'
 
-const Home = Loadable(lazy(async () => await import('./Home')))
+const Posts = Loadable(lazy(async () => await import('./Posts')))
 
 const sessionRoutes: RouteObject[] = [
   {
+    path: '/posts',
+    element: <Posts />,
+  },
+  {
     path: '/',
-    element: <Home />,
+    element: <Posts />,
   },
 ]
 

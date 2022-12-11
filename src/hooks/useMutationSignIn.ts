@@ -11,7 +11,7 @@ const useMutationSignIn = () => {
 
   return useMutation(signIn, {
     onSuccess: (data) => {
-      navigate('/')
+      navigate('/posts')
       const { message, user } = data
       authenticate(user)
       enqueueSnackbar(message, { variant: 'success' })
