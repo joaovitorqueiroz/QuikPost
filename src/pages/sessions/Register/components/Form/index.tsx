@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormInputText } from '@src/components/FormComponents'
 import validationSchema from './validation'
-import { useMutationRegister } from '@src/pages/sessions/hooks'
+import { useMutationRegister } from '@src/hooks'
 
 const initialValues = {
   name: '',

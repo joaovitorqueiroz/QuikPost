@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormInputText } from '@src/components/FormComponents'
 import validationSchema from './validation'
-import { useMutationSignIn } from '@src/pages/sessions/hooks'
+import { useMutationSignIn } from '@src/hooks'
 
 const initialValues = {
   username: '',
