@@ -1,27 +1,26 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useSnackbar } from 'notistack'
 import { useMutation, useQueryClient } from 'react-query'
-import { postRemove, PostRemoveResult } from '@src/services/api/post'
+import { commentUpdate, CommentUpdateResult } from '@src/services/api/comment'
 import { queryKeyGetPosts } from './useGetPosts'
-import { useNavigate } from 'react-router-dom'
+import { queryKeyGetPostById } from './useGetPostById'
 
-const useMutationPostRemove = () => {
+const useMutationCommentUpdate = () => {
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
-  const navigate = useNavigate()
 
-  return useMutation(postRemove, {
+  return useMutation(commentUpdate, {
     onSuccess: (data) => {
       const { message } = data
-      navigate('/posts')
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      queryClient.invalidateQueries(queryKeyGetPostById)
       queryClient.invalidateQueries(queryKeyGetPosts)
       enqueueSnackbar(message, { variant: 'success' })
     },
     onError: (error) => {
-      const { message } = error as PostRemoveResult
+      const { message } = error as CommentUpdateResult
       enqueueSnackbar(message, { variant: 'error' })
     },
   })
 }
 
-export default useMutationPostRemove
+export default useMutationCommentUpdate

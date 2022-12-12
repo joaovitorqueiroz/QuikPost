@@ -1,23 +1,23 @@
 import React, { useContext } from 'react'
 import { Paper, Typography, Box } from '@mui/material'
 import { Menu } from '@src/components'
-import { PostDialogContext } from '@src/contexts/PostDialogContext'
+import { CommentDialogContext } from '@src/contexts/CommentDialogContext'
 
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '@src/hooks'
+import { useAuth, useMutationCommentRemove } from '@src/hooks'
 
-type PostProps = {
+type CommentProps = {
   content: string
   id: number
   authorId: number
+  postId: number
 }
 
 const optionsMenu = ['Editar', 'Remover']
 
-const Comment: React.FC<PostProps> = ({ content, id, authorId }) => {
-  const { setPostEditing, openDialog } = useContext(PostDialogContext)
+const Comment: React.FC<CommentProps> = ({ content, id, authorId, postId }) => {
+  const { setCommentEditing, openDialog } = useContext(CommentDialogContext)
+  const { mutate: commentRemove } = useMutationCommentRemove()
   const { user } = useAuth()
-  const navigate = useNavigate()
 
   const enabledMenu = authorId === user?.id
   interface Actions {
@@ -26,11 +26,11 @@ const Comment: React.FC<PostProps> = ({ content, id, authorId }) => {
 
   const actions: Actions = {
     Editar: (): void => {
-      openDialog()
-      console.log('Editar')
+      openDialog(postId)
+      setCommentEditing({ content, id })
     },
     Remover: (): void => {
-      console.log('Remover')
+      commentRemove({ postId, commentId: id })
     },
   }
 
@@ -39,11 +39,11 @@ const Comment: React.FC<PostProps> = ({ content, id, authorId }) => {
   }
 
   return (
-    <Paper elevation={0} sx={{ mt: 2, ml: 2, mr: 2, mb: 2, backgroundColor: '#f8f8f8' }} key={id}>
+    <Paper elevation={0} sx={{ mt: 2, marginX: 2, mb: 2, backgroundColor: '#f8f8f8' }} key={id}>
       <Box sx={{ display: 'flex', justifyContent: 'end' }}>
         <Menu enabled={enabledMenu} options={optionsMenu} onClickOption={handleClickOptionMenu} />
       </Box>
-      <Box sx={{ pl: 2, pb: 1 }}>
+      <Box sx={{ pb: 2, marginX: 2 }}>
         <Typography variant="body2" component="div">
           {content}
         </Typography>

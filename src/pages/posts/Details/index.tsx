@@ -1,45 +1,29 @@
 import React, { useContext } from 'react'
-import { Box, styled, Card, Typography, CardActions } from '@mui/material'
+import { Box, styled, Card, Typography, CardActions, Button } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { FlexBetween, FlexAlignCenter } from '@src/components/FlexBox'
-// import { PostDialog } from '../Posts/components'
+import { FlexBetween, FlexAlignCenter, FlexBox } from '@src/components/FlexBox'
 import { Comment } from './components'
 import { useGetPostById } from '@src/hooks'
-import { PostDialogContext } from '@src/contexts/PostDialogContext'
 import CommentIcon from '@mui/icons-material/Comment'
 
-import { Post, PostDialog } from '@src/components'
+import { CommentDialog, Post, PostDialog } from '@src/components'
+import { CommentDialogContext, CommentDialogProvider } from '@src/contexts/CommentDialogContext'
 
 const Container = styled(Box)(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' },
 }))
 
-const comments = [
-  {
-    content: 'Comentario teste',
-    id: 1,
-    user_id: 2,
-  },
-  {
-    content: 'Comentario teste',
-    id: 2,
-    user_id: 2,
-  },
-  {
-    content: 'Comentario teste',
-    id: 3,
-    user_id: 2,
-  },
-]
-
 type FooterProps = {
   comments: any
+  postId: number
 }
 
-const Footer: React.FC<FooterProps> = ({ comments }) => {
+const Footer: React.FC<FooterProps> = ({ comments, postId }) => {
+  const { openDialog } = useContext(CommentDialogContext)
+
   return (
-    <Card>
+    <Box>
       <FlexBetween sx={{ mb: 2 }}>
         <CardActions />
         <FlexAlignCenter sx={{ mr: 4 }}>
@@ -58,9 +42,20 @@ const Footer: React.FC<FooterProps> = ({ comments }) => {
           content={comment.content}
           authorId={comment.user_id}
           key={comment.id}
+          postId={postId}
         />
       ))}
-    </Card>
+      <FlexBox sx={{ justifyContent: 'end' }}>
+        <Button
+          sx={{ mb: 2, mr: 2 }}
+          color="primary"
+          variant="contained"
+          onClick={() => openDialog(postId)}
+        >
+          Comentar
+        </Button>
+      </FlexBox>
+    </Box>
   )
 }
 
@@ -68,23 +63,23 @@ const Details: React.FC = () => {
   const { postId } = useParams()
   const { data: result } = useGetPostById(postId ? Number(postId) : null)
   const post = result?.data
-  const { setPostEditing } = useContext(PostDialogContext)
-
-  console.log('id', post)
 
   return post ? (
-    <Container>
-      <Post
-        key={post.id}
-        title={post.title}
-        content={post.content}
-        id={post.id}
-        authorId={post.user_id}
-        lineClamp={null}
-        footer={() => <Footer comments={comments} />}
-      />
-      <PostDialog />
-    </Container>
+    <CommentDialogProvider>
+      <Container>
+        <Post
+          key={post.id}
+          title={post.title}
+          content={post.content}
+          id={post.id}
+          authorId={post.user_id}
+          lineClamp={null}
+          footer={() => <Footer comments={post.comments} postId={post.id} />}
+        />
+        <CommentDialog />
+        <PostDialog />
+      </Container>
+    </CommentDialogProvider>
   ) : null
 }
 

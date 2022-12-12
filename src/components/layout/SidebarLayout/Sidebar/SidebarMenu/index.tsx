@@ -5,6 +5,7 @@ import { SidebarContext } from '@src/contexts/SidebarContext'
 
 import TextSnippetIcon from '@mui/icons-material/TextSnippet'
 import PostAddIcon from '@mui/icons-material/PostAdd'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -65,6 +66,7 @@ const SubMenuWrapper = styled(Box)(
 
 const SidebarMenu: React.FC = () => {
   const { closeSidebar } = useContext(SidebarContext)
+  const { openDialog: openPostDialog } = useContext(PostDialogContext)
 
   return (
     <MenuWrapper>
@@ -86,8 +88,11 @@ const SidebarMenu: React.FC = () => {
               <Button
                 disableRipple
                 component={RouterLink}
-                onClick={closeSidebar}
-                to="/post/create"
+                onClick={() => {
+                  closeSidebar()
+                  openPostDialog()
+                }}
+                to="/"
                 startIcon={<PostAddIcon />}
               >
                 Novo Post
