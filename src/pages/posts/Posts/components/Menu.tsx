@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { IconButton, Menu as MenuMUI, MenuItem } from '@mui/material'
 
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { useAuth } from '@src/hooks'
+import { useAuth, useMutationPostRemove } from '@src/hooks'
 
 const ITEM_HEIGHT = 48
 const options = ['Editar', 'Remover']
@@ -16,6 +16,7 @@ const Menu: React.FC<MenuProps> = ({ postId, authorId }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const { user } = useAuth()
+  const { mutate: postRemove } = useMutationPostRemove()
 
   const enabledMenu = authorId === user?.id
 
@@ -28,7 +29,7 @@ const Menu: React.FC<MenuProps> = ({ postId, authorId }) => {
       console.log('Editar Post: ', postId)
     },
     Remover: (): void => {
-      console.log('Remover Post: ', postId)
+      postRemove(postId)
     },
   }
 
