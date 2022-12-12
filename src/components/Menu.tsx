@@ -1,41 +1,19 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { IconButton, Menu as MenuMUI, MenuItem } from '@mui/material'
 
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { useAuth, useMutationPostRemove } from '@src/hooks'
-import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const ITEM_HEIGHT = 48
-const options = ['Editar', 'Remover']
 
 type MenuProps = {
-  postId: number
-  authorId: number
-  setPostEditing: () => void
+  options: string[]
+  enabled: boolean
+  onClickOption: (option: string) => void
 }
 
-const Menu: React.FC<MenuProps> = ({ postId, authorId, setPostEditing }) => {
+const Menu: React.FC<MenuProps> = ({ options, enabled, onClickOption }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
-  const { user } = useAuth()
-  const { mutate: postRemove } = useMutationPostRemove()
-  const { openDialog } = useContext(PostDialogContext)
-
-  const enabledMenu = authorId === user?.id
-
-  interface Actions {
-    [index: string]: () => void
-  }
-
-  const actions: Actions = {
-    Editar: (): void => {
-      setPostEditing()
-      openDialog()
-    },
-    Remover: (): void => {
-      postRemove(postId)
-    },
-  }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -45,12 +23,12 @@ const Menu: React.FC<MenuProps> = ({ postId, authorId, setPostEditing }) => {
     setAnchorEl(null)
   }
 
-  const handleClickItem = (action: string) => {
+  const handleClickOption = (option: string) => {
     handleClose()
-    actions[action]()
+    onClickOption(option)
   }
 
-  return enabledMenu ? (
+  return enabled ? (
     <>
       <IconButton
         aria-label="more"
@@ -78,7 +56,7 @@ const Menu: React.FC<MenuProps> = ({ postId, authorId, setPostEditing }) => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} onClick={() => handleClickItem(option)}>
+          <MenuItem key={option} onClick={() => handleClickOption(option)}>
             {option}
           </MenuItem>
         ))}

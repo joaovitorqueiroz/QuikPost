@@ -1,3 +1,1 @@
-export { default as Post } from './Post'
-export { default as Menu } from './Menu'
-export { default as PostDialog } from './PostDialog'
+export { default as PostItem } from './PostItem'

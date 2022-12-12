@@ -3,6 +3,7 @@ import { Loadable } from '@src/components'
 import { lazy } from 'react'
 
 const Posts = Loadable(lazy(async () => await import('./Posts')))
+const PostsDetails = Loadable(lazy(async () => await import('./Details')))
 
 const sessionRoutes: RouteObject[] = [
   {
@@ -12,6 +13,10 @@ const sessionRoutes: RouteObject[] = [
   {
     path: '/',
     element: <Posts />,
+  },
+  {
+    path: '/posts/:postId',
+    element: <PostsDetails />,
   },
 ]
 

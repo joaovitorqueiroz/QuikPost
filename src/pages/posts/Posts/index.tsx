@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Box, styled, Button } from '@mui/material'
-import { Post, PostDialog } from './components'
+import { PostItem } from './components'
+import { PostDialog } from '@src/components'
 import { useGetPosts } from '@src/hooks'
 import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
@@ -23,12 +24,13 @@ const Posts: React.FC = () => {
         </Button>
 
         {posts.map((post) => (
-          <Post
+          <PostItem
             title={post.title}
             content={post.content}
             id={post.id}
             authorId={post.user_id}
             key={post.id}
+            countComments={post?.comments?.length || 0}
           />
         ))}
       </Container>
