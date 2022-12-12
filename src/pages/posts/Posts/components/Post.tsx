@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   styled,
   Button,
@@ -9,6 +9,7 @@ import {
   CardHeader,
 } from '@mui/material'
 import Menu from './Menu'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const Content = styled(Typography)(() => ({
   overflow: 'hidden',
@@ -26,6 +27,7 @@ type PostProps = {
 }
 
 const Post: React.FC<PostProps> = ({ title, content, id, authorId }) => {
+  const { setPostEditing } = useContext(PostDialogContext)
   return (
     <Card sx={{ mt: 2 }} key={id}>
       <CardHeader
@@ -34,7 +36,13 @@ const Post: React.FC<PostProps> = ({ title, content, id, authorId }) => {
             {title}
           </Typography>
         }
-        action={<Menu postId={id} authorId={authorId} />}
+        action={
+          <Menu
+            postId={id}
+            authorId={authorId}
+            setPostEditing={() => setPostEditing({ title, content, id })}
+          />
+        }
       />
       <CardContent>
         <Content variant="body2" color="text.secondary">

@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { IconButton, Menu as MenuMUI, MenuItem } from '@mui/material'
 
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useAuth, useMutationPostRemove } from '@src/hooks'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const ITEM_HEIGHT = 48
 const options = ['Editar', 'Remover']
@@ -10,13 +11,15 @@ const options = ['Editar', 'Remover']
 type MenuProps = {
   postId: number
   authorId: number
+  setPostEditing: () => void
 }
 
-const Menu: React.FC<MenuProps> = ({ postId, authorId }) => {
+const Menu: React.FC<MenuProps> = ({ postId, authorId, setPostEditing }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const { user } = useAuth()
   const { mutate: postRemove } = useMutationPostRemove()
+  const { openDialog } = useContext(PostDialogContext)
 
   const enabledMenu = authorId === user?.id
 
@@ -26,7 +29,8 @@ const Menu: React.FC<MenuProps> = ({ postId, authorId }) => {
 
   const actions: Actions = {
     Editar: (): void => {
-      console.log('Editar Post: ', postId)
+      setPostEditing()
+      openDialog()
     },
     Remover: (): void => {
       postRemove(postId)

@@ -4,6 +4,7 @@ import { SnackbarProvider } from 'notistack'
 import { BrowserRouter } from 'react-router-dom'
 import { SidebarProvider } from './contexts/SidebarContext'
 import { AuthProvider } from './contexts/AuthContext'
+import { PostDialogProvider } from './contexts/PostDialogContext'
 import App from './App'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -21,11 +22,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <SidebarProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </SidebarProvider>
+          <PostDialogProvider>
+            <SidebarProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </SidebarProvider>
+          </PostDialogProvider>
         </AuthProvider>
       </QueryClientProvider>
     </SnackbarProvider>

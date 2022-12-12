@@ -1,19 +1,18 @@
+import { useContext } from 'react'
 import { Box, Dialog, Typography } from '@mui/material'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 import Form from './Form'
 
-type PostDialogProps = {
-  open: boolean
-  handleDialogClose: () => void
-}
+const PostDialog: React.FC = () => {
+  const { isOpenDialog, closeDialog, postEditing } = useContext(PostDialogContext)
 
-const PostDialog: React.FC<PostDialogProps> = ({ open, handleDialogClose }) => {
   return (
-    <Dialog open={open} onClose={handleDialogClose}>
+    <Dialog open={isOpenDialog} onClose={closeDialog}>
       <Box p={3}>
         <Typography variant="body1" component="div" sx={{ mb: '20px' }}>
-          {'Criar Post'}
+          {postEditing ? 'Editar Post' : 'Criar Post'}
         </Typography>
-        <Form handleDialogClose={handleDialogClose} />
+        <Form />
       </Box>
     </Dialog>
   )

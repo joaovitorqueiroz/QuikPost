@@ -1,40 +1,43 @@
+import { useContext } from 'react'
 import { LoadingButton } from '@mui/lab'
 import { Button } from '@mui/material'
 import { FlexBetween } from '@src/components/FlexBox'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormInputText } from '@src/components/FormComponents'
-import { useMutationPostCreate } from '@src/hooks'
+import { useMutationPostCreate, useMutationPostUpdate } from '@src/hooks'
 
 import * as yup from 'yup'
 import validatorErrorMessages from '@src/utils/validatorErrorMessages'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required(validatorErrorMessages.required),
   content: yup.string().required(validatorErrorMessages.required),
 })
 
-const initialValues = {
-  title: '',
-  content: '',
-}
-
-type FormProps = {
-  handleDialogClose: () => void
-}
-
-const Form: React.FC<FormProps> = ({ handleDialogClose }) => {
+const Form: React.FC = () => {
+  const { postEditing } = useContext(PostDialogContext)
+  const initialValues = {
+    title: postEditing?.title ?? '',
+    content: postEditing?.content ?? '',
+  }
   const { control, handleSubmit } = useForm({
     mode: 'onChange',
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
   })
-
+  const { closeDialog } = useContext(PostDialogContext)
   const { mutate: createPost } = useMutationPostCreate()
+  const { mutate: updatePost } = useMutationPostUpdate()
 
   const onSubmit = handleSubmit((data) => {
-    createPost(data)
-    handleDialogClose()
+    if (postEditing?.id) {
+      updatePost({ postId: postEditing.id, post: data })
+    } else {
+      createPost(data)
+    }
+    closeDialog()
   })
 
   return (
@@ -58,10 +61,10 @@ const Form: React.FC<FormProps> = ({ handleDialogClose }) => {
 
       <FlexBetween>
         <LoadingButton variant="contained" color="primary" type="submit">
-          Publicar
+          {postEditing ? 'Salvar' : 'Publicar'}
         </LoadingButton>
 
-        <Button variant="outlined" color="secondary" onClick={handleDialogClose}>
+        <Button variant="outlined" color="secondary" onClick={closeDialog}>
           Cancelar
         </Button>
       </FlexBetween>

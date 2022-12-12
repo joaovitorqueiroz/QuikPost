@@ -35,7 +35,7 @@ export type Comment = {
   user_id: number
 }
 
-export type Data = {
+export type PostData = {
   title: string
   content: string
   id: number
@@ -46,8 +46,38 @@ export type Data = {
 export type GetPostsResult = {
   success: boolean
   message?: string
-  data: Data[]
+  data: PostData[]
 }
 
 export const getPosts = async (): Promise<GetPostsResult> =>
   await ((await fakerApi.get('/posts', {})) as Promise<GetPostsResult>)
+
+// getPostById
+export type GetPostByIdResult = {
+  success: boolean
+  message?: string
+  data: PostData
+}
+export const getPostById = async (ctx: any): Promise<GetPostByIdResult> => {
+  const [, postId] = ctx.queryKey
+  return await ((await fakerApi.get('/posts/view', {
+    post_id: postId,
+  })) as Promise<GetPostByIdResult>)
+}
+
+// updatePost
+export type PostUpdateData = {
+  postId: number
+  post: PostCreateData
+}
+
+export type PostUpdateResult = {
+  success: boolean
+  message: string
+}
+export const postUpdate = async ({ postId, post }: PostUpdateData): Promise<PostUpdateResult> => {
+  return await ((await fakerApi.put('/posts/update', {
+    post_id: postId,
+    post,
+  })) as Promise<PostUpdateResult>)
+}

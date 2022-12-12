@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Box, styled, Button } from '@mui/material'
 import { Post, PostDialog } from './components'
 import { useGetPosts } from '@src/hooks'
+import { PostDialogContext } from '@src/contexts/PostDialogContext'
 
 const Container = styled(Box)(({ theme }) => ({
   margin: '30px',
@@ -9,23 +10,15 @@ const Container = styled(Box)(({ theme }) => ({
 }))
 
 const Posts: React.FC = () => {
-  const [openDialog, setOpenDialog] = useState<boolean>(false)
   const { data: result } = useGetPosts()
+  const { openDialog } = useContext(PostDialogContext)
 
   const posts = result?.data ?? []
-
-  const handleDialogOpen = () => {
-    setOpenDialog(true)
-  }
-
-  const handleDialogClose = () => {
-    setOpenDialog(false)
-  }
 
   return (
     <>
       <Container>
-        <Button sx={{ mb: 2 }} color="primary" variant="contained" onClick={handleDialogOpen}>
+        <Button sx={{ mb: 2 }} color="primary" variant="contained" onClick={openDialog}>
           Criar novo post
         </Button>
 
@@ -39,7 +32,7 @@ const Posts: React.FC = () => {
           />
         ))}
       </Container>
-      <PostDialog open={openDialog} handleDialogClose={handleDialogClose} />
+      <PostDialog />
     </>
   )
 }
