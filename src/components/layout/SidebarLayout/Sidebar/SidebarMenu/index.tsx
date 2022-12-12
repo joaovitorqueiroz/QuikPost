@@ -76,7 +76,7 @@ const SidebarMenu: React.FC = () => {
                 disableRipple
                 component={RouterLink}
                 onClick={closeSidebar}
-                to="/"
+                to="/posts"
                 startIcon={<TextSnippetIcon />}
               >
                 Posts
