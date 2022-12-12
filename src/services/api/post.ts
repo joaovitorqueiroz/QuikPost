@@ -27,3 +27,27 @@ export const postRemove = async (postId: number): Promise<PostRemoveResult> =>
   await ((await fakerApi.delete('/posts/remove', {
     post_id: postId,
   })) as Promise<PostRemoveResult>)
+
+// getPosts
+export type Comment = {
+  content: string
+  id: number
+  user_id: number
+}
+
+export type Data = {
+  title: string
+  content: string
+  id: number
+  user_id: number
+  comments: Comment[]
+}
+
+export type GetPostsResult = {
+  success: boolean
+  message?: string
+  data: Data[]
+}
+
+export const getPosts = async (): Promise<GetPostsResult> =>
+  await ((await fakerApi.get('/posts', {})) as Promise<GetPostsResult>)
