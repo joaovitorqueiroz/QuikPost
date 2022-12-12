@@ -1,5 +1,4 @@
-import FakerApi from '../fakerApi'
-const fakerApi = new FakerApi()
+import fakerApi from './fakerApi'
 
 // Register
 export type RegisterResult = {

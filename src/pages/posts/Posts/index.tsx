@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, styled, Button } from '@mui/material'
-import { Post } from './components'
+import { Post, PostDialog } from './components'
 
 const Container = styled(Box)(({ theme }) => ({
   margin: '30px',
@@ -39,22 +39,35 @@ const posts = [
 ]
 
 const Posts: React.FC = () => {
-  return (
-    <Container>
-      <Button sx={{ mb: 2 }} color="primary" variant="contained">
-        Criar novo post
-      </Button>
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
 
-      {posts.map((post) => (
-        <Post
-          title={post.title}
-          content={post.content}
-          id={post.id}
-          authorId={post.user_id}
-          key={post.id}
-        />
-      ))}
-    </Container>
+  const handleDialogOpen = () => {
+    setOpenDialog(true)
+  }
+
+  const handleDialogClose = () => {
+    setOpenDialog(false)
+  }
+
+  return (
+    <>
+      <Container>
+        <Button sx={{ mb: 2 }} color="primary" variant="contained" onClick={handleDialogOpen}>
+          Criar novo post
+        </Button>
+
+        {posts.map((post) => (
+          <Post
+            title={post.title}
+            content={post.content}
+            id={post.id}
+            authorId={post.user_id}
+            key={post.id}
+          />
+        ))}
+      </Container>
+      <PostDialog open={openDialog} handleDialogClose={handleDialogClose} />
+    </>
   )
 }
 
