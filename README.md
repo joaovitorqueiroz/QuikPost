@@ -51,7 +51,14 @@ Ao final da Instalação para executar o projeto execute o seguinte comando:
 Ao executar o comando um link pra o acesso será gerado em seu terminal ao qual executou o comando.
 
 
+## Execução dos teste
 
+
+O projeto possui alguns testes para as telas de signin e register. E podem ser executados pelo comando:
+
+```bash
+  npm run test
+```
 
 ## Stack utilizada
 
