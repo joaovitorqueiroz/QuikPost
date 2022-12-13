@@ -43,7 +43,7 @@ const Comment: React.FC<CommentProps> = ({ content, id, authorId, postId }) => {
       <Box sx={{ display: 'flex', justifyContent: 'end' }}>
         <Menu enabled={enabledMenu} options={optionsMenu} onClickOption={handleClickOptionMenu} />
       </Box>
-      <Box sx={{ pb: 2, marginX: 2 }}>
+      <Box sx={{ paddingY: 2, paddingX: 2 }}>
         <Typography variant="body2" component="div">
           {content}
         </Typography>

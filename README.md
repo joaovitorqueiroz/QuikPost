@@ -104,7 +104,7 @@ Alem disso para garantir um melhorar a padronização do código e sanitização
 &nbsp;
 <h4 align="center">
 <img src="https://user-images.githubusercontent.com/58531490/207201695-595ab82f-d1de-48f2-8f9f-283b253d0a04.png" width="800px" /><br>
- <b>Criar comentario</b>
+ <b>Criar comentário</b>
 </h4>
 &nbsp;
 <h4 align="center">
