@@ -90,7 +90,8 @@ export default {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "\\.(gif|ttf|eot|svg)$": "<rootDir>/src/test/__mocks__/fileMock.js"
+    "\\.(gif|ttf|eot|svg)$": "<rootDir>/src/test/__mocks__/fileMock.js",
+    '^@src/(.*)$': '<rootDir>/src/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
