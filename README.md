@@ -70,6 +70,7 @@ O projeto possui alguns testes para as telas de signin e register. E podem ser e
 - React Query: Para gerenciar as requisições criando estados em cache melhorando a performance e simplificando atualização de dados mediante alguma mudança.
 - notistack: Para o fornecer feedbacks aos usuários via snackbar.
 - React-hook-form: Gerenciamento de formulários. 
+- Yup: Validação de formulários.
 - Material UI: Design system
 - Jest e TestingLibrary: Para testes unitários e de integração. 
 
@@ -78,7 +79,7 @@ Alem disso para garantir um melhorar a padronização do código e sanitização
 - Eslint: Padronização do código.
 - Prettier: Correções automáticas de estrutura de código.
 - Commitlint: Manter um padrão da forma de como os commits são escritos e muito importante para um crescimento de um projeto. Commitlint impedi que commits que estejam fora do padrão do conventional commits seja realizado. 
-- Husk e LintStage: Para verificar e impedir que códigos que não estejam seguindo o padrão definido no eslint seja publicado.
+- Husk e LintStage: Para verificar e impedir que códigos que não estejam seguindo o padrão definido no eslint sejam publicado.
 
 &nbsp;
 
