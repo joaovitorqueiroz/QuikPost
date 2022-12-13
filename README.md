@@ -4,6 +4,8 @@
 Este projeto foi criado como teste admissional para a empresa QuikDev. 
 O objetivo é criar um micro blog permitindo que os usuários possam interagir entre si através de posts e comentários.
 
+Este projeto utiliza [faker Api](https://github.com/DiegoSilva94/FakeApiJs) simulando uma API rest
+
 
 ## Funcionalidades
 
